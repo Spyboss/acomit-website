@@ -3,12 +3,16 @@ import "../styles/global.css";
 
 export interface Props {
   title?: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
+const siteUrl = "https://www.acomit.lk";
+const defaultDescription = "Custom Software, Web & Mobile Solutions for Sri Lankan Businesses Since 2015";
 const pageTitle = title
   ? `${title} | Acom Information Technology`
   : "Acom Information Technology | Software, Web & Mobile Solutions Sri Lanka";
+const pageDescription = description || defaultDescription;
 ---
 
 <!doctype html>
@@ -16,22 +20,46 @@ const pageTitle = title
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Acom Information Technology - Custom Software, Web & Mobile Solutions for Sri Lankan Businesses Since 2015"
-    />
-    <meta
-      name="keywords"
-      content="software development sri lanka, web design sri lanka, mobile apps, pos system, inventory management, acom it"
-    />
-    <meta
-      name="google-site-verification"
-      content="PmbQ6bk5-r4rCI84KCYKs3tSQUMr5StBCMjei8M1I_0"
-    />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="keywords" content="software development sri lanka, web design sri lanka, mobile apps, pos system, inventory management, acom it" />
+    <meta name="google-site-verification" content="PmbQ6bk5-r4rCI84KCYKs3tSQUMr5StBCMjei8M1I_0" />
+    <meta name="theme-color" content="#7e22ce" />
+    <link rel="canonical" href={`${siteUrl}${Astro.url.pathname}`} />
     <link rel="icon" type="image/png" sizes="256x256" href="/assets/img/logo.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`${siteUrl}${Astro.url.pathname}`} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={`${siteUrl}/assets/img/logo.png`} />
+    <meta property="og:site_name" content="Acom Information Technology" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={`${siteUrl}/assets/img/logo.png`} />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
-    <title>{pageTitle}</title>
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Acom Information Technology",
+      url: siteUrl,
+      logo: `${siteUrl}/assets/img/logo.png`,
+      email: "info@acomit.lk",
+      telephone: "+94472262263",
+      address: { "@type": "PostalAddress", addressCountry: "LK" },
+      foundingDate: "2015",
+      description: defaultDescription,
+      sameAs: [
+        "https://facebook.com/acomit",
+        "https://linkedin.com/company/acomit",
+      ],
+    })} />
   </head>
   <body class="font-sans text-gray-900 bg-white">
     <slot name="header" />

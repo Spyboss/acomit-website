@@ -1,55 +1,79 @@
 backend:
-  name: git-gateway
-  branch: main
+  name: github
+  repo: Spyboss/acomit-website
+  branch: master
+  base_url: https://acomit.pages.dev
+  auth_endpoint: /api/auth
 
 media_folder: "public/assets/img"
 public_folder: "/assets/img"
 
 collections:
-  - name: "pages"
-    label: "Pages"
+  - name: "settings"
+    label: "Homepage Settings"
     files:
       - name: "home"
-        label: "Home Page"
-        file: "src/content/pages/home.md"
+        label: "Homepage"
+        file: "src/content/settings/home.md"
         fields:
           - { label: "Hero Title", name: "hero_title", widget: "string" }
-          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
           - { label: "About Text", name: "about_text", widget: "markdown" }
-      - name: "services"
-        label: "Services"
-        file: "src/content/pages/services.md"
-        fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Body", name: "body", widget: "markdown" }
-      - name: "about"
-        label: "About"
-        file: "src/content/pages/about.md"
-        fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Body", name: "body", widget: "markdown" }
-      - name: "contact"
-        label: "Contact"
-        file: "src/content/pages/contact.md"
-        fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Email", name: "email", widget: "string" }
-          - { label: "Phone", name: "phone", widget: "string" }
-  - name: "services_list"
-    label: "Service Items"
+
+  - name: "services"
+    label: "Services"
+    label_singular: "Service"
     folder: "src/content/services"
     create: true
+    format: "frontmatter"
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Icon", name: "icon", widget: "string" }
-  - name: "products_list"
+      - { label: "Subtitle", name: "subtitle", widget: "string" }
+      - { label: "Short Description", name: "description", widget: "text" }
+      - label: "Icon"
+        name: "icon"
+        widget: "select"
+        options:
+          - { label: "Code", value: "code" }
+          - { label: "Globe", value: "globe" }
+          - { label: "Smartphone", value: "smartphone" }
+          - { label: "Package", value: "package" }
+      - label: "Features"
+        name: "features"
+        widget: "list"
+        field: { label: "Feature", name: "feature", widget: "string" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
+
+  - name: "products"
     label: "Products"
+    label_singular: "Product"
     folder: "src/content/products"
     create: true
+    format: "frontmatter"
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Tagline", name: "tagline", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
-      - { label: "Icon", name: "icon", widget: "string" }
+      - label: "Color Theme"
+        name: "color"
+        widget: "select"
+        options:
+          - { label: "Blue", value: "blue" }
+          - { label: "Green", value: "green" }
+          - { label: "Orange", value: "orange" }
+          - { label: "Purple", value: "purple" }
+      - label: "Icon"
+        name: "icon"
+        widget: "select"
+        options:
+          - { label: "Package (Inventory)", value: "package" }
+          - { label: "Credit Card (POS)", value: "credit-card" }
+          - { label: "Users (Welfare)", value: "users" }
+          - { label: "Chart (Comparator)", value: "chart" }
+      - label: "Features"
+        name: "features"
+        widget: "list"
+        field: { label: "Feature", name: "feature", widget: "string" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }

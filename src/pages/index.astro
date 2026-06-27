@@ -7,6 +7,10 @@ import ServicesSection from "../components/ServicesSection.astro";
 import ProductsSection from "../components/ProductsSection.astro";
 import AboutSection from "../components/AboutSection.astro";
 import ContactSection from "../components/ContactSection.astro";
+import { getEntry } from "astro:content";
+
+const home = await getEntry("settings", "home");
+const { hero_title, hero_subtitle } = home.data;
 ---
 
 <BaseLayout>
@@ -14,7 +18,7 @@ import ContactSection from "../components/ContactSection.astro";
     <Header />
   </Fragment>
 
-  <HeroSection />
+  <HeroSection heroTitle={hero_title} heroSubtitle={hero_subtitle} />
   <ServicesSection />
   <ProductsSection />
   <AboutSection />

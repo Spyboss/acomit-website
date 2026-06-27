@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout title="Terms of Service">
+  <Fragment slot="header">
+    <Header />
+  </Fragment>
+
+  <section class="pt-32 pb-16 gradient-purple relative overflow-hidden">
+    <div class="absolute top-10 left-1/4 w-80 h-80 rounded-full bg-primary-400/5 blur-3xl"></div>
+    <div class="absolute bottom-0 right-20 w-64 h-64 rounded-full bg-accent-500/5 blur-3xl"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
+      <h1 class="font-display text-4xl md:text-5xl font-extrabold text-white" data-aos="fade-up">Terms of Service</h1>
+      <p class="mt-4 text-lg text-primary-200 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+        Terms governing the use of our website and services
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 prose prose-gray">
+      <p class="text-sm text-gray-500">Last updated: June 2026</p>
+
+      <h2>Acceptance of Terms</h2>
+      <p>By accessing or using the acomit.lk website, you agree to be bound by these Terms of Service. If you do not agree, please do not use our website.</p>
+
+      <h2>Services</h2>
+      <p>Acom Information Technology provides software development, web solutions, mobile applications, and related IT services. Specific terms for each project are outlined in separate service agreements.</p>
+
+      <h2>Intellectual Property</h2>
+      <p>All content on this website, including text, graphics, logos, and software, is the property of Acom Information Technology unless otherwise stated. You may not reproduce, distribute, or modify our content without written permission.</p>
+
+      <h2>Limitation of Liability</h2>
+      <p>Acom Information Technology shall not be liable for any indirect, incidental, or consequential damages arising from the use of our website or services.</p>
+
+      <h2>Contact</h2>
+      <p>For questions about these terms, contact us at <a href="mailto:info@acomit.lk" class="text-primary-600 hover:text-primary-700">info@acomit.lk</a>.</p>
+    </div>
+  </section>
+
+  <Fragment slot="footer">
+    <Footer />
+  </Fragment>
+</BaseLayout>

@@ -2,89 +2,11 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { getCollection } from "astro:content";
+import { ICON_PATHS } from "../data/icons";
+import { PRODUCT_COLORS } from "../data/colors";
 
-const products = [
-  {
-    title: "Business Inventory Management System",
-    tagline: "Full control over your stock, suppliers, and orders",
-    description:
-      "A comprehensive inventory management solution that gives you real-time visibility into your stock levels, automates reordering, and provides detailed analytics. Perfect for retail, wholesale, and distribution businesses.",
-    features: [
-      "Real-time stock tracking & alerts",
-      "Supplier & purchase order management",
-      "Multi-warehouse support",
-      "Barcode scanning integration",
-      "Automated reorder points",
-      "Detailed inventory reports & analytics",
-      "Stock transfer between locations",
-      "Batch & expiry date tracking",
-    ],
-    color: "from-blue-500 to-blue-600",
-    bgColor: "bg-blue-50",
-    borderColor: "border-blue-100",
-    textColor: "text-blue-600",
-  },
-  {
-    title: "Point of Sale Billing System",
-    tagline: "Fast, reliable billing for retail & wholesale",
-    description:
-      "A powerful POS system designed for the Sri Lankan market. Process sales quickly, generate professional invoices, manage customers, and track payments — all from an intuitive interface.",
-    features: [
-      "Quick sale processing",
-      "Invoice & receipt generation",
-      "Customer management & history",
-      "Multiple payment methods",
-      "Discount & promotion engine",
-      "Sales reports & analytics",
-      "Cash drawer & printer support",
-      "Offline mode capability",
-    ],
-    color: "from-green-500 to-green-600",
-    bgColor: "bg-green-50",
-    borderColor: "border-green-100",
-    textColor: "text-green-600",
-  },
-  {
-    title: "Welfare Management System",
-    tagline: "Digital management for employee welfare societies",
-    description:
-      "A specialized solution for managing employee welfare societies, cooperative thrift funds, and loan schemes. Track members, manage loans, calculate interest, and generate reports with ease.",
-    features: [
-      "Member registration & management",
-      "Loan application & approval workflow",
-      "Automated interest calculation",
-      "Installment tracking & reminders",
-      "Savings & deposit management",
-      "Financial statements & reports",
-      "Dividend calculation",
-      "Meeting minutes & document storage",
-    ],
-    color: "from-orange-500 to-orange-600",
-    bgColor: "bg-orange-50",
-    borderColor: "border-orange-100",
-    textColor: "text-orange-600",
-  },
-  {
-    title: "Credit Card Details Comparing System",
-    tagline: "Help customers make informed financial decisions",
-    description:
-      "A comparison tool that lets users evaluate credit card features, interest rates, fees, and benefits side-by-side. Designed for financial institutions and comparison platforms.",
-    features: [
-      "Side-by-side card comparison",
-      "Interest rate & fee analysis",
-      "Benefits & rewards comparison",
-      "Filter by card type & bank",
-      "Custom scoring & ranking",
-      "Export comparison reports",
-      "Regular data updates",
-      "Responsive design for all devices",
-    ],
-    color: "from-purple-500 to-purple-600",
-    bgColor: "bg-purple-50",
-    borderColor: "border-purple-100",
-    textColor: "text-purple-600",
-  },
-];
+const products = (await getCollection("products")).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout title="Products">
@@ -105,45 +27,43 @@ const products = [
 
   <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 space-y-16">
-      {products.map((product, i) => (
-        <div
-          class={`rounded-2xl border ${product.borderColor} ${product.bgColor} overflow-hidden card-hover`}
-          data-aos="fade-up"
-        >
-          <div class="p-8 md:p-12">
-            <div class="grid gap-8 md:grid-cols-[1fr_1.5fr]">
-              <div>
-                <div class={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${product.color} text-white mb-5`}>
-                  <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    {i === 0 && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />}
-                    {i === 1 && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />}
-                    {i === 2 && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />}
-                    {i === 3 && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />}
-                  </svg>
+      {products.map((product) => {
+        const c = PRODUCT_COLORS[product.data.color] || PRODUCT_COLORS.blue;
+        return (
+          <div
+            class={`rounded-2xl border ${c.border} ${c.bg} overflow-hidden card-hover`}
+            data-aos="fade-up"
+          >
+            <div class="p-8 md:p-12">
+              <div class="grid gap-8 md:grid-cols-[1fr_1.5fr]">
+                <div>
+                  <div class={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${c.gradient} text-white mb-5`}>
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={ICON_PATHS[product.data.icon]} /></svg>
+                  </div>
+                  <h2 class="font-display text-2xl font-bold text-gray-900">{product.data.title}</h2>
+                  <p class={`mt-1 text-sm font-medium ${c.text}`}>{product.data.tagline}</p>
+                  <p class="mt-4 text-gray-600 leading-relaxed">{product.data.description}</p>
                 </div>
-                <h2 class="font-display text-2xl font-bold text-gray-900">{product.title}</h2>
-                <p class={`mt-1 text-sm font-medium ${product.textColor}`}>{product.tagline}</p>
-                <p class="mt-4 text-gray-600 leading-relaxed">{product.description}</p>
-              </div>
-              <div>
-                <h3 class="font-semibold text-gray-900 mb-4">Key Features</h3>
-                <div class="grid gap-3 sm:grid-cols-2">
-                  {product.features.map((f) => (
-                    <div class="flex items-start gap-2.5">
-                      <svg class={`w-5 h-5 ${product.textColor} flex-shrink-0 mt-0.5`} fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
-                      <span class="text-sm text-gray-700">{f}</span>
-                    </div>
-                  ))}
+                <div>
+                  <h3 class="font-semibold text-gray-900 mb-4">Key Features</h3>
+                  <div class="grid gap-3 sm:grid-cols-2">
+                    {product.data.features.map((f: string) => (
+                      <div class="flex items-start gap-2.5">
+                        <svg class={`w-5 h-5 ${c.text} flex-shrink-0 mt-0.5`} fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        <span class="text-sm text-gray-700">{f}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <a href="/contact" class={`inline-flex items-center gap-2 mt-6 px-5 py-2.5 text-sm font-semibold text-white rounded-lg bg-gradient-to-r ${c.gradient} hover:shadow-lg transition-all active:scale-95`}>
+                    Request a Demo
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  </a>
                 </div>
-                <a href="/contact" class={`inline-flex items-center gap-2 mt-6 px-5 py-2.5 text-sm font-semibold text-white rounded-lg bg-gradient-to-r ${product.color} hover:shadow-lg transition-all active:scale-95`}>
-                  Request a Demo
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </a>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   </section>
 
