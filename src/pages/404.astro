@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout>
+  <Fragment slot="header">
+    <Header />
+  </Fragment>
+
+  <section class="min-h-screen flex items-center justify-center pt-24 gradient-purple relative overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute top-20 left-10 w-72 h-72 rounded-full bg-primary-400/5 blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-accent-500/5 blur-3xl"></div>
+    </div>
+    <div class="relative z-10 max-w-2xl mx-auto px-4 text-center">
+      <div class="text-9xl font-extrabold text-white/10 font-display">404</div>
+      <h1 class="mt-4 font-display text-4xl font-bold text-white">Page Not Found</h1>
+      <p class="mt-4 text-lg text-primary-200">
+        The page you're looking for doesn't exist or has been moved.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 mt-8">
+        <a href="/" class="btn-primary">Go Home</a>
+        <a href="/contact" class="btn-outline">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <Fragment slot="footer">
+    <Footer />
+  </Fragment>
+</BaseLayout>

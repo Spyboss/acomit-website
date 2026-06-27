@@ -1,0 +1,76 @@
+<section class="relative min-h-screen flex items-center pt-24 overflow-hidden gradient-purple">
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-primary-500/10 blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-accent-500/10 blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary-600/5 blur-3xl"></div>
+  </div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 py-20">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div data-aos="fade-right">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-6 text-sm font-medium rounded-full text-primary-200 bg-primary-800/50 border border-primary-700/50">
+          <span class="w-2 h-2 rounded-full bg-accent-400 animate-pulse"></span>
+          Trusted Since 2015
+        </div>
+        <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+          Software & Web Solutions for<br />
+          <span class="text-gradient">Sri Lankan Businesses</span>
+        </h1>
+        <p class="mt-6 text-lg leading-relaxed text-primary-200 max-w-xl">
+          We help businesses start, grow, and digitize with custom software, modern websites, and mobile applications. From POS systems to inventory management — we build what you need.
+        </p>
+        <div class="flex flex-wrap gap-4 mt-8">
+          <a href="/services" class="btn-primary">
+            Explore Services
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <a href="/contact" class="btn-outline">Get a Quote</a>
+        </div>
+        <div class="flex items-center gap-8 mt-12">
+          <div>
+            <div class="text-2xl font-bold text-white">9+</div>
+            <div class="text-sm text-primary-300">Years Experience</div>
+          </div>
+          <div class="w-px h-10 bg-primary-700"></div>
+          <div>
+            <div class="text-2xl font-bold text-white">50+</div>
+            <div class="text-sm text-primary-300">Projects Delivered</div>
+          </div>
+          <div class="w-px h-10 bg-primary-700"></div>
+          <div>
+            <div class="text-2xl font-bold text-white">100%</div>
+            <div class="text-sm text-primary-300">Client Satisfaction</div>
+          </div>
+        </div>
+      </div>
+      <div data-aos="fade-left" class="relative hidden lg:block">
+        <div class="swiper hero-swiper rounded-2xl overflow-hidden shadow-2xl shadow-primary-900/50">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="/assets/img/slider-1.jpg" alt="Software Solutions" class="w-full h-[500px] object-cover" />
+            </div>
+            <div class="swiper-slide">
+              <img src="/assets/img/slider-2.jpg" alt="Web Solutions" class="w-full h-[500px] object-cover" />
+            </div>
+            <div class="swiper-slide">
+              <img src="/assets/img/slider-3.jpg" alt="Mobile Solutions" class="w-full h-[500px] object-cover" />
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  new Swiper(".hero-swiper", {
+    loop: true,
+    autoplay: { delay: 4000, disableOnInteraction: false },
+    pagination: { el: ".swiper-pagination", clickable: true },
+    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+    effect: "fade",
+    fadeEffect: { crossFade: true },
+  });
+</script>

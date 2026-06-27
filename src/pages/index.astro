@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import HeroSection from "../components/HeroSection.astro";
+import ServicesSection from "../components/ServicesSection.astro";
+import ProductsSection from "../components/ProductsSection.astro";
+import AboutSection from "../components/AboutSection.astro";
+import ContactSection from "../components/ContactSection.astro";
+---
+
+<BaseLayout>
+  <Fragment slot="header">
+    <Header />
+  </Fragment>
+
+  <HeroSection />
+  <ServicesSection />
+  <ProductsSection />
+  <AboutSection />
+  <ContactSection />
+
+  <Fragment slot="footer">
+    <Footer />
+  </Fragment>
+</BaseLayout>

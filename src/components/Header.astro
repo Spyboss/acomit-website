@@ -1,0 +1,74 @@
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="header">
+  <div class="bg-primary-950/90 backdrop-blur-md border-b border-primary-800/50">
+    <div class="hidden px-4 py-1.5 text-sm text-primary-300 bg-primary-900/50 md:block">
+      <div class="flex items-center justify-end gap-6 max-w-7xl mx-auto">
+        <a href="mailto:info@acomit.lk" class="flex items-center gap-1.5 hover:text-white transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          info@acomit.lk
+        </a>
+        <a href="tel:+94472262263" class="flex items-center gap-1.5 hover:text-white transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          +94 47 2 262 263
+        </a>
+      </div>
+    </div>
+    <nav class="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/assets/img/logo-1.png" alt="Acom IT" class="h-10" />
+        <span class="hidden text-lg font-bold text-white md:block font-display">Acom IT</span>
+      </a>
+      <div class="hidden md:flex items-center gap-1">
+        <a href="/" class="px-4 py-2 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50 transition-all">Home</a>
+        <a href="/services" class="px-4 py-2 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50 transition-all">Services</a>
+        <a href="/products" class="px-4 py-2 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50 transition-all">Products</a>
+        <a href="/about" class="px-4 py-2 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50 transition-all">About</a>
+        <a href="/contact" class="px-4 py-2 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50 transition-all">Contact</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="/client-login" class="hidden px-5 py-2 text-sm font-semibold text-white transition-all duration-300 rounded-lg md:inline-flex items-center gap-2 bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-400 hover:to-accent-500 hover:shadow-lg hover:shadow-accent-500/30 active:scale-95">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+          Client Login
+        </a>
+        <button id="mobile-menu-btn" class="p-2 text-primary-200 md:hidden hover:text-white" aria-label="Toggle menu">
+          <svg class="w-6 h-6" id="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg class="hidden w-6 h-6" id="close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div id="mobile-menu" class="hidden border-t md:hidden border-primary-800/50 bg-primary-950/95 backdrop-blur-md">
+      <div class="px-4 py-3 space-y-1">
+        <a href="/" class="block px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50">Home</a>
+        <a href="/services" class="block px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50">Services</a>
+        <a href="/products" class="block px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50">Products</a>
+        <a href="/about" class="block px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50">About</a>
+        <a href="/contact" class="block px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50">Contact</a>
+        <a href="/client-login" class="block px-4 py-2.5 mt-2 text-sm font-semibold text-center text-white rounded-lg bg-gradient-to-r from-accent-500 to-accent-600">Client Login</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const menuIcon = document.getElementById("menu-icon");
+  const closeIcon = document.getElementById("close-icon");
+
+  btn?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+    menuIcon?.classList.toggle("hidden");
+    closeIcon?.classList.toggle("hidden");
+  });
+
+  let lastScroll = 0;
+  const header = document.getElementById("header");
+  window.addEventListener("scroll", () => {
+    const current = window.scrollY;
+    if (current > lastScroll && current > 100) {
+      header?.classList.add("-translate-y-full");
+    } else {
+      header?.classList.remove("-translate-y-full");
+    }
+    lastScroll = current;
+  });
+</script>

@@ -1,0 +1,57 @@
+---
+export interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+const pageTitle = title
+  ? `${title} | Acom Information Technology`
+  : "Acom Information Technology | Software, Web & Mobile Solutions Sri Lanka";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Acom Information Technology - Custom Software, Web & Mobile Solutions for Sri Lankan Businesses Since 2015"
+    />
+    <meta
+      name="keywords"
+      content="software development sri lanka, web design sri lanka, mobile apps, pos system, inventory management, acom it"
+    />
+    <meta
+      name="google-site-verification"
+      content="PmbQ6bk5-r4rCI84KCYKs3tSQUMr5StBCMjei8M1I_0"
+    />
+    <link rel="icon" type="image/png" sizes="256x256" href="/assets/img/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <title>{pageTitle}</title>
+  </head>
+  <body class="font-sans text-gray-900 bg-white">
+    <slot name="header" />
+    <main>
+      <slot />
+    </main>
+    <slot name="footer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100,
+        disable: "mobile",
+      });
+    </script>
+  </body>
+</html>

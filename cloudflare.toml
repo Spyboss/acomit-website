@@ -1,0 +1,31 @@
+[build]
+command = "npm run build"
+output_dir = "dist"
+
+[build.environment]
+NODE_VERSION = "20"
+
+[[redirects]]
+from = "/ums/*"
+to = "/ums/"
+status = 200
+
+[[redirects]]
+from = "/dayan/*"
+to = "/dayan/"
+status = 200
+
+[[redirects]]
+from = "/downloads/*"
+to = "/downloads/"
+status = 200
+
+[[redirects]]
+from = "/c.php"
+to = "/client-login"
+status = 301
+
+[[redirects]]
+from = "/admin"
+to = "/admin/index.html"
+status = 200

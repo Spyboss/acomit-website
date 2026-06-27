@@ -1,0 +1,142 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const services = [
+  {
+    title: "Software Solutions",
+    subtitle: "Custom-built applications for your unique business needs",
+    description:
+      "We develop tailored software solutions on open-source platforms that streamline your operations, reduce costs, and drive growth. Our expertise spans multiple industries and business sizes.",
+    features: [
+      "Custom software development & architecture",
+      "Open-source platform expertise",
+      "Business process automation",
+      "System integration & API development",
+      "Legacy system modernization",
+      "Database design & optimization",
+    ],
+    icon: "code",
+  },
+  {
+    title: "Web Solutions",
+    subtitle: "Your complete online presence, expertly crafted",
+    description:
+      "From beautiful marketing websites to powerful web applications, we design and build digital experiences that engage your audience and deliver results. We also provide reliable hosting.",
+    features: [
+      "Responsive web design & development",
+      "Web application development",
+      "E-commerce solutions",
+      "Web hosting & maintenance",
+      "SEO optimization",
+      "Performance optimization",
+    ],
+    icon: "globe",
+  },
+  {
+    title: "Mobile Solutions",
+    subtitle: "Reach your customers wherever they are",
+    description:
+      "Extend your business to mobile with custom Android applications and SMS-based platforms. We build apps that are fast, intuitive, and designed for the Sri Lankan market.",
+    features: [
+      "Android app development",
+      "SMS-based application development",
+      "Mobile web platforms",
+      "App maintenance & updates",
+      "Mobile UI/UX design",
+      "API integration",
+    ],
+    icon: "smartphone",
+  },
+  {
+    title: "Featured Products",
+    subtitle: "Ready-to-deploy solutions for immediate impact",
+    description:
+      "Our suite of ready-made software products can be deployed quickly to solve common business challenges. From inventory to financial tools, we have you covered.",
+    features: [
+      "Inventory management systems",
+      "POS billing solutions",
+      "Welfare & society management",
+      "Credit card comparison tools",
+      "Quick deployment",
+      "Ongoing support & training",
+    ],
+    icon: "package",
+  },
+];
+
+const iconPaths = {
+  code: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4",
+  globe: "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9",
+  smartphone: "M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z",
+  package: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4",
+};
+---
+
+<BaseLayout title="Services">
+  <Fragment slot="header">
+    <Header />
+  </Fragment>
+
+  <section class="pt-32 pb-16 gradient-purple relative overflow-hidden">
+    <div class="absolute top-20 right-20 w-64 h-64 rounded-full bg-primary-400/5 blur-3xl"></div>
+    <div class="absolute bottom-10 left-10 w-80 h-80 rounded-full bg-accent-500/5 blur-3xl"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
+      <h1 class="font-display text-4xl md:text-5xl font-extrabold text-white" data-aos="fade-up">Our Services</h1>
+      <p class="mt-4 text-lg text-primary-200 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+        End-to-end technology solutions tailored for Sri Lankan businesses
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 space-y-24">
+      {services.map((service, i) => (
+        <div class={`grid gap-12 items-center ${i % 2 === 0 ? "lg:grid-cols-[1.2fr_1fr]" : "lg:grid-cols-[1fr_1.2fr]"}`} data-aos="fade-up">
+          <div class={i % 2 === 0 ? "order-1" : "order-1 lg:order-2"}>
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary-100 text-primary-600 mb-6">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={iconPaths[service.icon]} /></svg>
+            </div>
+            <h2 class="font-display text-3xl font-bold text-gray-900">{service.title}</h2>
+            <p class="mt-2 text-lg text-primary-600 font-medium">{service.subtitle}</p>
+            <p class="mt-4 text-gray-600 leading-relaxed">{service.description}</p>
+            <div class="grid gap-3 mt-8 sm:grid-cols-2">
+              {service.features.map((f) => (
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-primary-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                  <span class="text-sm text-gray-700">{f}</span>
+                </div>
+              ))}
+            </div>
+            <a href="/contact" class="btn-primary mt-8">Discuss Your Project</a>
+          </div>
+          <div class={`${i % 2 === 0 ? "order-2" : "order-2 lg:order-1"}`}>
+            <div class="relative">
+              <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary-100 to-primary-50 border border-primary-100 flex items-center justify-center p-8">
+                <div class="text-center">
+                  <svg class="w-24 h-24 mx-auto text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d={iconPaths[service.icon]} /></svg>
+                </div>
+              </div>
+              <div class="absolute -bottom-4 -right-4 w-full h-full rounded-2xl border-2 border-primary-200 -z-10"></div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 text-center" data-aos="fade-up">
+      <h2 class="font-display text-3xl font-bold text-gray-900">Need a Custom Solution?</h2>
+      <p class="mt-3 text-gray-600 max-w-xl mx-auto">
+        Don't see exactly what you're looking for? We build custom software tailored to your specific requirements.
+      </p>
+      <a href="/contact" class="btn-primary mt-8">Get in Touch</a>
+    </div>
+  </section>
+
+  <Fragment slot="footer">
+    <Footer />
+  </Fragment>
+</BaseLayout>
