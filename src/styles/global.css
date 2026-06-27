@@ -1,48 +1,189 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/inter/800.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+@import "@fontsource/plus-jakarta-sans/800.css";
+
+@theme {
+  --color-primary-50: #faf5ff;
+  --color-primary-100: #f3e8ff;
+  --color-primary-200: #e9d5ff;
+  --color-primary-300: #d8b4fe;
+  --color-primary-400: #c084fc;
+  --color-primary-500: #a855f7;
+  --color-primary-600: #9333ea;
+  --color-primary-700: #7e22ce;
+  --color-primary-800: #6b21a8;
+  --color-primary-900: #581c87;
+  --color-primary-950: #3b0764;
+
+  --color-accent-50: #fff7ed;
+  --color-accent-100: #ffedd5;
+  --color-accent-200: #fed7aa;
+  --color-accent-300: #fdba74;
+  --color-accent-400: #fb923c;
+  --color-accent-500: #f97316;
+  --color-accent-600: #ea580c;
+  --color-accent-700: #c2410c;
+  --color-accent-800: #9a3412;
+  --color-accent-900: #7c2d12;
+
+  --font-family-sans: "Inter", "system-ui", "sans-serif";
+  --font-family-display: "Plus Jakarta Sans", "Inter", "system-ui", "sans-serif";
+
+  --animate-fade-in: fadeIn 0.6s ease-out;
+  --animate-slide-up: slideUp 0.6s ease-out;
+  --animate-slide-down: slideDown 0.4s ease-out;
+  --animate-scale-in: scaleIn 0.4s ease-out;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 5px color-mix(in srgb, var(--color-primary-500) 20%, transparent); }
+  to { box-shadow: 0 0 20px color-mix(in srgb, var(--color-primary-500) 40%, transparent); }
+}
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
   body {
-    @apply antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
 @layer components {
   .gradient-purple {
-    @apply bg-gradient-to-br from-primary-900 via-primary-800 to-primary-950;
+    background: linear-gradient(to bottom right, var(--color-primary-900), var(--color-primary-800), var(--color-primary-950));
   }
   .gradient-accent {
-    @apply bg-gradient-to-r from-accent-500 to-accent-600;
+    background: linear-gradient(to right, var(--color-accent-500), var(--color-accent-600));
   }
   .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
+    background: rgb(255 255 255 / 0.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.2);
   }
   .glass-dark {
-    @apply bg-gray-900/80 backdrop-blur-md border border-gray-800;
+    background: rgb(17 24 39 / 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgb(55 65 81 / 0.5);
   }
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, var(--color-primary-400), var(--color-accent-400));
   }
   .card-hover {
-    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary-500/20;
+    transition: all 0.3s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px color-mix(in srgb, var(--color-primary-500) 20%, transparent);
   }
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-6 py-3 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-500 hover:to-primary-600 hover:shadow-lg hover:shadow-primary-500/30 active:scale-95;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    color: white;
+    border-radius: 0.5rem;
+    background: linear-gradient(to right, var(--color-primary-600), var(--color-primary-700));
+    transition: all 0.3s ease;
+  }
+  .btn-primary:hover {
+    background: linear-gradient(to right, var(--color-primary-500), var(--color-primary-600));
+    box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--color-primary-500) 30%, transparent);
+  }
+  .btn-primary:active {
+    transform: scale(0.95);
   }
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-6 py-3 font-semibold transition-all duration-300 border-2 rounded-lg border-primary-400 text-primary-300 hover:bg-primary-600 hover:text-white hover:border-primary-500 active:scale-95;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    border: 2px solid var(--color-primary-400);
+    color: var(--color-primary-300);
+    transition: all 0.3s ease;
+  }
+  .btn-outline:hover {
+    background: var(--color-primary-600);
+    color: white;
+    border-color: var(--color-primary-500);
+  }
+  .btn-outline:active {
+    transform: scale(0.95);
   }
   .btn-accent {
-    @apply inline-flex items-center gap-2 px-6 py-3 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-400 hover:to-accent-500 hover:shadow-lg hover:shadow-accent-500/30 active:scale-95;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    color: white;
+    border-radius: 0.5rem;
+    background: linear-gradient(to right, var(--color-accent-500), var(--color-accent-600));
+    transition: all 0.3s ease;
+  }
+  .btn-accent:hover {
+    background: linear-gradient(to right, var(--color-accent-400), var(--color-accent-500));
+    box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--color-accent-500) 30%, transparent);
+  }
+  .btn-accent:active {
+    transform: scale(0.95);
   }
   .section-title {
-    @apply font-display text-3xl font-bold text-gray-900 md:text-4xl;
+    font-family: var(--font-family-display);
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--color-gray-900);
+  }
+  @media (width >= 768px) {
+    .section-title {
+      font-size: 2.25rem;
+    }
   }
   .section-subtitle {
-    @apply mt-4 text-lg text-gray-600 max-w-2xl;
+    margin-top: 1rem;
+    font-size: 1.125rem;
+    color: var(--color-gray-600);
+    max-width: 36rem;
   }
 }

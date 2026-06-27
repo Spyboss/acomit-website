@@ -1,3 +1,16 @@
+---
+import { Image } from "astro:assets";
+import slider1 from "../assets/img/slider-1.jpg";
+import slider2 from "../assets/img/slider-2.jpg";
+import slider3 from "../assets/img/slider-3.jpg";
+
+const slides = [
+  { src: slider1, alt: "Software Solutions" },
+  { src: slider2, alt: "Web Solutions" },
+  { src: slider3, alt: "Mobile Solutions" },
+];
+---
+
 <section class="relative min-h-screen flex items-center pt-24 overflow-hidden gradient-purple">
   <div class="absolute inset-0 overflow-hidden">
     <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-primary-500/10 blur-3xl"></div>
@@ -45,32 +58,38 @@
       <div data-aos="fade-left" class="relative hidden lg:block">
         <div class="swiper hero-swiper rounded-2xl overflow-hidden shadow-2xl shadow-primary-900/50">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="/assets/img/slider-1.jpg" alt="Software Solutions" class="w-full h-[500px] object-cover" />
-            </div>
-            <div class="swiper-slide">
-              <img src="/assets/img/slider-2.jpg" alt="Web Solutions" class="w-full h-[500px] object-cover" />
-            </div>
-            <div class="swiper-slide">
-              <img src="/assets/img/slider-3.jpg" alt="Mobile Solutions" class="w-full h-[500px] object-cover" />
-            </div>
+            {slides.map((slide, i) => (
+              <div class="swiper-slide">
+                <Image
+                  src={slide.src}
+                  alt={slide.alt}
+                  class="w-full h-[500px] object-cover"
+                  loading={i === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  widths={[600, 900, 1200, 1920]}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            ))}
           </div>
           <div class="swiper-pagination"></div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next !text-white"></div>
+          <div class="swiper-button-prev !text-white"></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<script>
-  new Swiper(".hero-swiper", {
-    loop: true,
-    autoplay: { delay: 4000, disableOnInteraction: false },
-    pagination: { el: ".swiper-pagination", clickable: true },
-    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-    effect: "fade",
-    fadeEffect: { crossFade: true },
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", function () {
+    new Swiper(".hero-swiper", {
+      loop: true,
+      autoplay: { delay: 4000, disableOnInteraction: false },
+      pagination: { el: ".swiper-pagination", clickable: true },
+      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+      effect: "fade",
+      fadeEffect: { crossFade: true },
+    });
   });
 </script>
