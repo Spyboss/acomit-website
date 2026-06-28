@@ -2,6 +2,8 @@ backend:
   name: github
   repo: Spyboss/acomit-website
   branch: master
+  base_url: https://acomit.pages.dev
+  auth_endpoint: /api/auth
   squash_merges: true
 
 media_folder: "public/assets/img"
