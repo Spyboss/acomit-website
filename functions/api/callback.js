@@ -1,60 +1,37 @@
-function renderBody(status, content) {
-  const html = `
-    <script>
-      const receiveMessage = (message) => {
-        window.opener.postMessage(
-          'authorization:github:${status}:${JSON.stringify(content)}',
-          message.origin
-        );
-        window.removeEventListener("message", receiveMessage, false);
-      }
-      window.addEventListener("message", receiveMessage, false);
-      window.opener.postMessage("authorizing:github", "*");
-    </script>
-  `;
-  return html;
-}
-
 export async function onRequest(context) {
   const { request, env } = context;
-  const client_id = env.GITHUB_CLIENT_ID;
-  const client_secret = env.GITHUB_CLIENT_SECRET;
 
   try {
     const url = new URL(request.url);
     const code = url.searchParams.get("code");
 
-    const response = await fetch("https://github.com/login/oauth/access_token", {
+    const res = await fetch("https://github.com/login/oauth/access_token", {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "user-agent": "cloudflare-pages-decap-cms-oauth",
         accept: "application/json",
       },
-      body: JSON.stringify({ client_id, client_secret, code }),
+      body: JSON.stringify({
+        client_id: env.GITHUB_CLIENT_ID,
+        client_secret: env.GITHUB_CLIENT_SECRET,
+        code,
+      }),
     });
 
-    const result = await response.json();
+    const result = await res.json();
 
     if (result.error) {
-      return new Response(renderBody("error", result), {
-        headers: { "content-type": "text/html;charset=UTF-8" },
-        status: 401,
-      });
+      return new Response(`Error: ${result.error_description || result.error}`, { status: 401 });
     }
 
-    return new Response(
-      renderBody("success", { token: result.access_token, provider: "github" }),
-      {
-        headers: { "content-type": "text/html;charset=UTF-8" },
-        status: 200,
-      }
-    );
+    const token = result.access_token;
+    const origin = url.origin;
+
+    // Redirect to a static page that communicates with the opener
+    // The token is passed in the hash fragment (never sent to server)
+    const redirectTo = `${origin}/admin/callback-success#token=${token}`;
+    return Response.redirect(redirectTo, 302);
   } catch (error) {
-    console.error(error);
-    return new Response(error.message, {
-      headers: { "content-type": "text/html;charset=UTF-8" },
-      status: 500,
-    });
+    return new Response(error.message, { status: 500 });
   }
 }
