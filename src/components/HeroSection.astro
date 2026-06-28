@@ -1,31 +1,21 @@
 ---
-import { Image } from "astro:assets";
-import slider1 from "../assets/img/slider-1.jpg";
-import slider2 from "../assets/img/slider-2.jpg";
-import slider3 from "../assets/img/slider-3.jpg";
-
 export interface Props {
   heroTitle: string;
   heroSubtitle: string;
 }
 
 const { heroTitle, heroSubtitle } = Astro.props;
-
-const slides = [
-  { src: slider1, alt: "Software Solutions" },
-  { src: slider2, alt: "Web Solutions" },
-  { src: slider3, alt: "Mobile Solutions" },
-];
 ---
 
-<section class="relative min-h-screen flex items-center pt-24 overflow-hidden gradient-purple">
+<section class="relative min-h-screen flex items-center pt-24 overflow-hidden gradient-purple" id="hero">
   <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-primary-500/10 blur-3xl"></div>
-    <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-accent-500/10 blur-3xl"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary-600/5 blur-3xl"></div>
+    <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-primary-500/15 blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-accent-500/15 blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] rounded-full bg-primary-500/10 blur-3xl"></div>
   </div>
-  <div class="relative z-10 max-w-7xl mx-auto px-4 py-20">
-    <div class="grid items-center gap-12 lg:grid-cols-2">
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 py-20 w-full">
+    <div class="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
       <div data-aos="fade-right">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-6 text-sm font-medium rounded-full text-primary-200 bg-primary-800/50 border border-primary-700/50">
           <span class="w-2 h-2 rounded-full bg-accent-400 animate-pulse"></span>
@@ -61,41 +51,37 @@ const slides = [
           </div>
         </div>
       </div>
-      <div data-aos="fade-left" class="relative hidden lg:block">
-        <div class="swiper hero-swiper rounded-2xl overflow-hidden shadow-2xl shadow-primary-900/50">
-          <div class="swiper-wrapper">
-            {slides.map((slide, i) => (
-              <div class="swiper-slide">
-                <Image
-                  src={slide.src}
-                  alt={slide.alt}
-                  class="w-full h-[500px] object-cover"
-                  loading={i === 0 ? "eager" : "lazy"}
-                  decoding="async"
-                  widths={[600, 900, 1200, 1920]}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-            ))}
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-next !text-white"></div>
-          <div class="swiper-button-prev !text-white"></div>
+      <div data-aos="fade-left" class="relative min-h-[430px] lg:min-h-[560px]">
+        <div class="absolute inset-0 rounded-[2rem] bg-white/[0.03] border border-white/10 shadow-2xl shadow-primary-950/40 backdrop-blur-sm"></div>
+        <canvas id="hero-canvas" class="relative z-10 block w-full h-[430px] lg:h-[560px]"></canvas>
+        <div class="absolute bottom-5 left-5 right-5 z-20 hidden rounded-2xl border border-white/10 bg-primary-950/50 px-5 py-4 text-primary-100 backdrop-blur-md md:block">
+          <div class="text-sm font-semibold text-white">Custom systems connected end-to-end</div>
+          <div class="mt-1 text-xs text-primary-300">Software, web, mobile and business operations working as one platform.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", function () {
-    new Swiper(".hero-swiper", {
-      loop: true,
-      autoplay: { delay: 4000, disableOnInteraction: false },
-      pagination: { el: ".swiper-pagination", clickable: true },
-      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-      effect: "fade",
-      fadeEffect: { crossFade: true },
-    });
-  });
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    #hero-canvas {
+      opacity: 0.75;
+    }
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement | null;
+  if (canvas) {
+    const init = async () => {
+      const { initHeroScene } = await import("./heroScene");
+      initHeroScene(canvas);
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init, { once: true });
+    } else {
+      init();
+    }
+  }
 </script>

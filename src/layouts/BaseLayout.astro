@@ -42,7 +42,6 @@ const pageDescription = description || defaultDescription;
     <meta name="twitter:image" content={`${siteUrl}/assets/img/logo.png`} />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
 
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
@@ -68,7 +67,6 @@ const pageDescription = description || defaultDescription;
     </main>
     <slot name="footer" />
     <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <script is:inline>
       AOS.init({
         duration: 800,
