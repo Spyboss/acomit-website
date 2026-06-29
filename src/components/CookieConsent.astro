@@ -15,7 +15,7 @@
 
 <style>
   #cookie-consent.show {
-    transform: translateY(0);
+    translate: 0 0;
     opacity: 1;
   }
 </style>
@@ -23,14 +23,12 @@
 <script>
   const KEY = "acomit-cookie-consent";
 
-  (function () {
-    if (localStorage.getItem(KEY) !== null) return;
-
+  if (localStorage.getItem(KEY) === null) {
     const el = document.getElementById("cookie-consent")!;
     const accept = document.getElementById("cookie-accept")!;
     const decline = document.getElementById("cookie-decline")!;
 
-    el.classList.add("show");
+    requestAnimationFrame(() => el.classList.add("show"));
 
     function dismiss(choice: string) {
       localStorage.setItem(KEY, choice);
@@ -40,5 +38,5 @@
 
     accept.addEventListener("click", () => dismiss("accepted"));
     decline.addEventListener("click", () => dismiss("declined"));
-  })();
+  }
 </script>
