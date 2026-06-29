@@ -15,11 +15,18 @@ import {
   Scene,
   Sprite,
   SpriteMaterial,
+  SRGBColorSpace,
   Vector2,
   WebGLRenderer,
 } from "three";
 
-type PlaneItem = Mesh<PlaneGeometry, MeshBasicMaterial>;
+const CLOUDINARY = "https://res.cloudinary.com/dthx4fxte/image/upload";
+
+const DASHBOARD_URL = `${CLOUDINARY}/v1781014306/FireShot_Capture_001_-_SBK_Tyre_Distributors_-_sbk-tyres.pages.dev_q9o0t1.png`;
+const PHONE_URL = `${CLOUDINARY}/v1782715388/screenshot-2026-06-29_12-12-41_enkaeu.png`;
+const RESTAURANT_URL = `${CLOUDINARY}/v1781006162/FireShot_Capture_025_-_RealTaste_-_Restaurant_Orders_-_realtaste.pages.dev_vhjwln.png`;
+const BIKE_URL = `${CLOUDINARY}/v1781005958/FireShot_Capture_024_-_SriRentABike_-_Bike_Rentals_in_Tangalle_Sri_Lanka_-_srirentabike.com_g7f0ue.png`;
+const PIAGGIO_URL = `${CLOUDINARY}/v1781019892/screencapture-piaggio-streamlit-app-2026-06-09-21_13_53_avlfkb.png`;
 
 function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
   ctx.beginPath();
@@ -39,218 +46,11 @@ function makeTexture(width: number, height: number, draw: (ctx: CanvasRenderingC
   ctx.clearRect(0, 0, width, height);
   draw(ctx);
   const texture = new CanvasTexture(canvas);
+  texture.colorSpace = SRGBColorSpace;
   texture.minFilter = LinearFilter;
   texture.magFilter = LinearFilter;
   texture.needsUpdate = true;
   return texture;
-}
-
-function createDashboardTexture() {
-  return makeTexture(1280, 760, (ctx) => {
-    const w = 1280;
-    const h = 760;
-    const bg = ctx.createLinearGradient(0, 0, w, h);
-    bg.addColorStop(0, "rgba(255,255,255,0.22)");
-    bg.addColorStop(0.45, "rgba(255,255,255,0.10)");
-    bg.addColorStop(1, "rgba(59,7,100,0.42)");
-
-    ctx.shadowColor = "rgba(168,85,247,0.45)";
-    ctx.shadowBlur = 46;
-    roundRect(ctx, 30, 30, w - 60, h - 60, 42);
-    ctx.fillStyle = bg;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = "rgba(255,255,255,0.24)";
-    ctx.stroke();
-
-    ctx.fillStyle = "rgba(18,9,40,0.72)";
-    roundRect(ctx, 56, 58, w - 112, 70, 26);
-    ctx.fill();
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "800 30px Plus Jakarta Sans, Inter, Arial, sans-serif";
-    ctx.fillText("Acom Business Suite", 92, 104);
-    ctx.fillStyle = "rgba(216,180,254,0.82)";
-    ctx.font = "500 18px Inter, Arial, sans-serif";
-    ctx.fillText("Inventory • POS • Welfare • Reporting", 396, 103);
-
-    const status = ctx.createLinearGradient(960, 76, 1140, 110);
-    status.addColorStop(0, "#f97316");
-    status.addColorStop(1, "#fb923c");
-    ctx.fillStyle = status;
-    roundRect(ctx, 1008, 76, 162, 34, 17);
-    ctx.fill();
-    ctx.fillStyle = "white";
-    ctx.font = "700 16px Inter, Arial, sans-serif";
-    ctx.fillText("LIVE SYSTEM", 1035, 99);
-
-    const kpis = [
-      ["Today Sales", "Rs. 428K", "↑ 18%"],
-      ["Inventory", "12,480", "SKU active"],
-      ["Orders", "348", "synced"],
-    ];
-    for (let i = 0; i < kpis.length; i++) {
-      const x = 76 + i * 264;
-      ctx.fillStyle = "rgba(255,255,255,0.10)";
-      roundRect(ctx, x, 160, 230, 116, 28);
-      ctx.fill();
-      ctx.strokeStyle = "rgba(255,255,255,0.14)";
-      ctx.stroke();
-      ctx.fillStyle = "rgba(216,180,254,0.9)";
-      ctx.font = "600 18px Inter, Arial, sans-serif";
-      ctx.fillText(kpis[i][0], x + 24, 197);
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "800 34px Plus Jakarta Sans, Inter, Arial, sans-serif";
-      ctx.fillText(kpis[i][1], x + 24, 240);
-      ctx.fillStyle = i === 0 ? "#fb923c" : "rgba(255,255,255,0.62)";
-      ctx.font = "600 15px Inter, Arial, sans-serif";
-      ctx.fillText(kpis[i][2], x + 24, 262);
-    }
-
-    ctx.fillStyle = "rgba(255,255,255,0.09)";
-    roundRect(ctx, 76, 314, 684, 312, 32);
-    ctx.fill();
-    ctx.strokeStyle = "rgba(255,255,255,0.12)";
-    ctx.stroke();
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "800 24px Plus Jakarta Sans, Inter, Arial, sans-serif";
-    ctx.fillText("Sales & Stock Movement", 112, 362);
-
-    const chartBase = 560;
-    const bars = [96, 148, 122, 204, 176, 248, 220, 280];
-    for (let i = 0; i < bars.length; i++) {
-      const x = 124 + i * 72;
-      const bar = ctx.createLinearGradient(0, chartBase - bars[i], 0, chartBase);
-      bar.addColorStop(0, i % 2 ? "#fb923c" : "#c084fc");
-      bar.addColorStop(1, "rgba(168,85,247,0.22)");
-      ctx.fillStyle = bar;
-      roundRect(ctx, x, chartBase - bars[i], 34, bars[i], 16);
-      ctx.fill();
-    }
-    ctx.strokeStyle = "rgba(255,255,255,0.12)";
-    ctx.lineWidth = 2;
-    for (let y = 410; y <= 560; y += 50) {
-      ctx.beginPath();
-      ctx.moveTo(112, y);
-      ctx.lineTo(710, y);
-      ctx.stroke();
-    }
-
-    ctx.fillStyle = "rgba(255,255,255,0.09)";
-    roundRect(ctx, 802, 160, 392, 466, 32);
-    ctx.fill();
-    ctx.strokeStyle = "rgba(255,255,255,0.12)";
-    ctx.stroke();
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "800 24px Plus Jakarta Sans, Inter, Arial, sans-serif";
-    ctx.fillText("Recent Business Activity", 838, 208);
-
-    const rows = [
-      ["POS invoice synced", "Just now", "#fb923c"],
-      ["Inventory reorder alert", "8 min", "#c084fc"],
-      ["Mobile field update", "22 min", "#a855f7"],
-      ["Web portal request", "1 hr", "#fb923c"],
-      ["Welfare payment batch", "2 hr", "#c084fc"],
-    ];
-    for (let i = 0; i < rows.length; i++) {
-      const y = 250 + i * 66;
-      ctx.fillStyle = "rgba(255,255,255,0.08)";
-      roundRect(ctx, 836, y, 322, 48, 18);
-      ctx.fill();
-      ctx.fillStyle = rows[i][2];
-      ctx.beginPath();
-      ctx.arc(862, y + 24, 7, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "rgba(255,255,255,0.9)";
-      ctx.font = "600 17px Inter, Arial, sans-serif";
-      ctx.fillText(rows[i][0], 884, y + 22);
-      ctx.fillStyle = "rgba(216,180,254,0.68)";
-      ctx.font = "500 13px Inter, Arial, sans-serif";
-      ctx.fillText(rows[i][1], 884, y + 40);
-    }
-  });
-}
-
-function createPhoneTexture() {
-  return makeTexture(460, 860, (ctx) => {
-    const w = 460;
-    const h = 860;
-    ctx.shadowColor = "rgba(249,115,22,0.42)";
-    ctx.shadowBlur = 40;
-    roundRect(ctx, 34, 22, w - 68, h - 44, 72);
-    ctx.fillStyle = "rgba(15,8,34,0.96)";
-    ctx.fill();
-    ctx.shadowBlur = 0;
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = "rgba(255,255,255,0.2)";
-    ctx.stroke();
-    roundRect(ctx, 72, 76, w - 144, 42, 21);
-    ctx.fillStyle = "rgba(255,255,255,0.12)";
-    ctx.fill();
-
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "800 34px Plus Jakarta Sans, Inter, Arial, sans-serif";
-    ctx.fillText("Field App", 74, 176);
-    ctx.fillStyle = "rgba(216,180,254,0.78)";
-    ctx.font = "500 18px Inter, Arial, sans-serif";
-    ctx.fillText("Live order updates", 76, 208);
-
-    ctx.fillStyle = "rgba(249,115,22,0.22)";
-    roundRect(ctx, 72, 250, 316, 116, 30);
-    ctx.fill();
-    ctx.fillStyle = "#fb923c";
-    ctx.font = "800 46px Plus Jakarta Sans, Inter, Arial, sans-serif";
-    ctx.fillText("42", 104, 316);
-    ctx.fillStyle = "rgba(255,255,255,0.82)";
-    ctx.font = "600 18px Inter, Arial, sans-serif";
-    ctx.fillText("deliveries in progress", 176, 313);
-
-    const items = ["Collect payment", "Update stock", "Send invoice", "Customer visit"];
-    for (let i = 0; i < items.length; i++) {
-      const y = 416 + i * 82;
-      ctx.fillStyle = "rgba(255,255,255,0.08)";
-      roundRect(ctx, 72, y, 316, 58, 20);
-      ctx.fill();
-      ctx.fillStyle = i % 2 ? "#c084fc" : "#fb923c";
-      ctx.beginPath();
-      ctx.arc(104, y + 29, 10, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "rgba(255,255,255,0.9)";
-      ctx.font = "600 19px Inter, Arial, sans-serif";
-      ctx.fillText(items[i], 130, y + 36);
-    }
-  });
-}
-
-function createMiniCardTexture(title: string, subtitle: string, color: string) {
-  return makeTexture(640, 300, (ctx) => {
-    const bg = ctx.createLinearGradient(0, 0, 640, 300);
-    bg.addColorStop(0, "rgba(255,255,255,0.18)");
-    bg.addColorStop(1, "rgba(255,255,255,0.07)");
-    ctx.shadowColor = color.replace("1)", "0.45)");
-    ctx.shadowBlur = 34;
-    roundRect(ctx, 24, 24, 592, 252, 34);
-    ctx.fillStyle = bg;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-    ctx.strokeStyle = "rgba(255,255,255,0.18)";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    ctx.fillStyle = color;
-    roundRect(ctx, 58, 58, 72, 72, 24);
-    ctx.fill();
-    ctx.fillStyle = "white";
-    ctx.font = "800 38px Plus Jakarta Sans, Inter, Arial, sans-serif";
-    ctx.fillText(title, 58, 180);
-    ctx.fillStyle = "rgba(216,180,254,0.78)";
-    ctx.font = "500 22px Inter, Arial, sans-serif";
-    ctx.fillText(subtitle, 60, 218);
-    for (let i = 0; i < 5; i++) {
-      ctx.fillStyle = i < 3 ? color : "rgba(255,255,255,0.16)";
-      roundRect(ctx, 400 + i * 28, 74 + i * 24, 86, 10, 5);
-      ctx.fill();
-    }
-  });
 }
 
 function createGlowTexture() {
@@ -264,7 +64,45 @@ function createGlowTexture() {
   });
 }
 
-function createPlane(texture: CanvasTexture, width: number, height: number, x: number, y: number, z: number): PlaneItem {
+function loadImage(url: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
+async function createGlassTexture(url: string, w: number, h: number, radius: number): Promise<CanvasTexture> {
+  const img = await loadImage(url);
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d")!;
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+
+  ctx.save();
+  roundRect(ctx, 0, 0, w, h, radius);
+  ctx.clip();
+  ctx.drawImage(img, 0, 0, w, h);
+  ctx.restore();
+
+  roundRect(ctx, 0, 0, w, h, radius);
+  ctx.strokeStyle = "rgba(255,255,255,0.05)";
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  const texture = new CanvasTexture(canvas);
+  texture.colorSpace = SRGBColorSpace;
+  texture.minFilter = LinearFilter;
+  texture.magFilter = LinearFilter;
+  texture.needsUpdate = true;
+  return texture;
+}
+
+function createPlane(texture: CanvasTexture, width: number, height: number, x: number, y: number, z: number) {
   const plane = new Mesh(
     new PlaneGeometry(width, height),
     new MeshBasicMaterial({ map: texture, transparent: true, depthWrite: false }),
@@ -273,15 +111,19 @@ function createPlane(texture: CanvasTexture, width: number, height: number, x: n
   return plane;
 }
 
-export function initHeroScene(canvas: HTMLCanvasElement): () => void {
+export async function initHeroScene(canvas: HTMLCanvasElement): Promise<() => void> {
+  canvas.style.opacity = "0";
+  canvas.style.transition = "opacity 0.8s ease";
+
   const scene = new Scene();
   const camera = new PerspectiveCamera(38, 1, 0.1, 100);
-  camera.position.set(0, 0.1, 8.4);
+  camera.position.set(0, 0.1, 8.6);
 
   const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   const group = new Group();
+  group.scale.set(0.78, 0.78, 0.78);
   scene.add(group);
 
   const glow = new Sprite(new SpriteMaterial({ map: createGlowTexture(), transparent: true, depthWrite: false }));
@@ -289,38 +131,46 @@ export function initHeroScene(canvas: HTMLCanvasElement): () => void {
   glow.scale.set(7.5, 7.5, 1);
   scene.add(glow);
 
-  const dashboard = createPlane(createDashboardTexture(), 5.5, 3.25, -0.2, 0.1, 0);
+  const [dashboardTex, phoneTex, restaurantTex, bikeTex, piaggioTex] = await Promise.all([
+    createGlassTexture(DASHBOARD_URL, 1600, 946, 24),
+    createGlassTexture(PHONE_URL, 380, 714, 18),
+    createGlassTexture(RESTAURANT_URL, 640, 300, 16),
+    createGlassTexture(BIKE_URL, 640, 300, 16),
+    createGlassTexture(PIAGGIO_URL, 640, 300, 16),
+  ]);
+
+  const dashboard = createPlane(dashboardTex, 5.5, 3.25, -0.2, 0.1, 0);
   dashboard.rotation.y = -0.14;
   dashboard.rotation.x = 0.035;
   group.add(dashboard);
 
-  const phone = createPlane(createPhoneTexture(), 1.25, 2.35, 2.45, -0.45, 0.55);
+  const phone = createPlane(phoneTex, 1.25, 2.35, 2.45, -0.45, 0.55);
   phone.rotation.y = -0.28;
   phone.rotation.z = -0.035;
   group.add(phone);
 
-  const inventory = createPlane(createMiniCardTexture("Inventory", "Low stock alerts", "rgba(192,132,252,1)"), 2.25, 1.05, -2.55, 1.75, 0.72);
+  const inventory = createPlane(restaurantTex, 2.25, 1.05, -2.55, 1.75, 0.72);
   inventory.rotation.y = 0.18;
   inventory.rotation.z = -0.025;
   group.add(inventory);
 
-  const pos = createPlane(createMiniCardTexture("POS Billing", "Invoices synced", "rgba(249,115,22,1)"), 2.25, 1.05, -2.35, -1.75, 0.78);
+  const pos = createPlane(bikeTex, 2.25, 1.05, -2.35, -1.75, 0.78);
   pos.rotation.y = 0.12;
   pos.rotation.z = 0.035;
   group.add(pos);
 
-  const web = createPlane(createMiniCardTexture("Web Portal", "Customer access", "rgba(168,85,247,1)"), 2.1, 0.98, 1.65, 1.85, 0.68);
+  const web = createPlane(piaggioTex, 2.1, 0.98, 1.65, 1.85, 0.68);
   web.rotation.y = -0.24;
   web.rotation.z = 0.025;
   group.add(web);
 
   const planes = [dashboard, phone, inventory, pos, web];
 
-  const particlePositions = new Float32Array(80 * 3);
-  for (let i = 0; i < 80; i++) {
-    particlePositions[i * 3] = (Math.random() - 0.5) * 7.8;
-    particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 5;
-    particlePositions[i * 3 + 2] = -1.8 - Math.random() * 2.5;
+  const particlePositions = new Float32Array(120 * 3);
+  for (let i = 0; i < 120; i++) {
+    particlePositions[i * 3] = (Math.random() - 0.5) * 10;
+    particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 6.5;
+    particlePositions[i * 3 + 2] = -1.8 - Math.random() * 3;
   }
   const particleGeo = new BufferGeometry();
   particleGeo.setAttribute("position", new Float32BufferAttribute(particlePositions, 3));
@@ -328,14 +178,16 @@ export function initHeroScene(canvas: HTMLCanvasElement): () => void {
     particleGeo,
     new PointsMaterial({
       color: new Color("#d8b4fe"),
-      size: 0.035,
+      size: 0.04,
       transparent: true,
-      opacity: 0.38,
+      opacity: 0.32,
       blending: AdditiveBlending,
       depthWrite: false,
     }),
   );
   scene.add(particles);
+
+  canvas.style.opacity = "1";
 
   const mouse = new Vector2(0, 0);
   const target = new Vector2(0, 0);

@@ -10,16 +10,16 @@ const { heroTitle, heroSubtitle } = Astro.props;
 <section class="relative min-h-screen flex items-center pt-24 overflow-hidden gradient-purple" id="hero">
   <div class="absolute inset-0 overflow-hidden">
     <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-primary-500/15 blur-3xl"></div>
-    <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-accent-500/15 blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-primary-500/10 blur-3xl"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] rounded-full bg-primary-500/10 blur-3xl"></div>
   </div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-4 py-20 w-full">
     <div class="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
       <div data-aos="fade-right">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-6 text-sm font-medium rounded-full text-primary-200 bg-primary-800/50 border border-primary-700/50">
-          <span class="w-2 h-2 rounded-full bg-accent-400 animate-pulse"></span>
-          Trusted Since 2015
+        <div class="badge-glass inline-flex items-center gap-2 px-4 py-1.5 mb-6 text-sm font-medium rounded-full text-primary-200">
+          <span class="relative z-10 w-1.5 h-1.5 rounded-full bg-accent-400 shadow-[0_0_6px_rgba(249,115,22,0.5)] animate-glow-pulse"></span>
+          <span class="relative z-10">Trusted Since 2015</span>
         </div>
         <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
           {heroTitle}
@@ -52,9 +52,8 @@ const { heroTitle, heroSubtitle } = Astro.props;
         </div>
       </div>
       <div data-aos="fade-left" class="relative min-h-[430px] lg:min-h-[560px]">
-        <div class="absolute inset-0 rounded-[2rem] bg-white/[0.03] border border-white/10 shadow-2xl shadow-primary-950/40 backdrop-blur-sm"></div>
-        <canvas id="hero-canvas" class="relative z-10 block w-full h-[430px] lg:h-[560px]"></canvas>
-        <div class="absolute bottom-5 left-5 right-5 z-20 hidden rounded-2xl border border-white/10 bg-primary-950/50 px-5 py-4 text-primary-100 backdrop-blur-md md:block">
+        <canvas id="hero-canvas" class="block w-full h-[430px] lg:h-[560px]"></canvas>
+        <div class="absolute bottom-2 left-5 right-5 z-20 hidden rounded-2xl border border-white/10 bg-primary-950/50 px-5 py-4 text-primary-100 backdrop-blur-md md:block">
           <div class="text-sm font-semibold text-white">Custom systems connected end-to-end</div>
           <div class="mt-1 text-xs text-primary-300">Software, web, mobile and business operations working as one platform.</div>
         </div>
@@ -68,6 +67,64 @@ const { heroTitle, heroSubtitle } = Astro.props;
     #hero-canvas {
       opacity: 0.75;
     }
+    .badge-glass {
+      animation: none !important;
+    }
+    .badge-glass::after {
+      animation: none !important;
+    }
+    .animate-glow-pulse {
+      animation: none !important;
+      box-shadow: 0 0 6px rgba(249, 115, 22, 0.4);
+    }
+  }
+
+  .badge-glass {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 0 20px rgba(168, 85, 247, 0.08),
+      inset 0 0 20px rgba(255, 255, 255, 0.03);
+  }
+
+  .badge-glass::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.08) 45%,
+      rgba(216, 180, 254, 0.05) 50%,
+      transparent 65%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { background-position: 200% 0; }
+    50% { background-position: -50% 0; }
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 4px rgba(249, 115, 22, 0.4);
+      transform: scale(1);
+    }
+    50% {
+      box-shadow: 0 0 16px rgba(249, 115, 22, 0.8), 0 0 32px rgba(249, 115, 22, 0.2);
+      transform: scale(1.15);
+    }
   }
 </style>
 
@@ -76,7 +133,7 @@ const { heroTitle, heroSubtitle } = Astro.props;
   if (canvas) {
     const init = async () => {
       const { initHeroScene } = await import("./heroScene");
-      initHeroScene(canvas);
+      await initHeroScene(canvas);
     };
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", init, { once: true });
