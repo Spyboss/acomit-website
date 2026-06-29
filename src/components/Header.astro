@@ -1,3 +1,8 @@
+---
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => pathname === href || pathname === href + "/";
+---
+
 <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="header">
   <div class="bg-primary-950/90 backdrop-blur-md border-b border-primary-800/50">
     <div class="hidden px-4 py-1.5 text-sm text-primary-300 bg-primary-900/50 md:block">
@@ -17,11 +22,11 @@
         <img src="/assets/img/logo-1.png" alt="Acom IT" class="h-10" />
       </a>
       <div class="hidden md:flex items-center gap-1">
-        <a href="/" class="px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50 transition-all">Home</a>
-        <a href="/services" class="px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50 transition-all">Services</a>
-        <a href="/products" class="px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50 transition-all">Products</a>
-        <a href="/about" class="px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50 transition-all">About</a>
-        <a href="/contact" class="px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50 transition-all">Contact</a>
+        <a href="/" class="px-4 py-2.5 text-sm font-medium rounded-lg transition-all" class:list={[isActive("/") ? "text-white bg-primary-800/50" : "text-primary-200 hover:text-white hover:bg-primary-800/50"]} aria-current={isActive("/") ? "page" : undefined}>Home</a>
+        <a href="/services" class="px-4 py-2.5 text-sm font-medium rounded-lg transition-all" class:list={[isActive("/services") ? "text-white bg-primary-800/50" : "text-primary-200 hover:text-white hover:bg-primary-800/50"]} aria-current={isActive("/services") ? "page" : undefined}>Services</a>
+        <a href="/products" class="px-4 py-2.5 text-sm font-medium rounded-lg transition-all" class:list={[isActive("/products") ? "text-white bg-primary-800/50" : "text-primary-200 hover:text-white hover:bg-primary-800/50"]} aria-current={isActive("/products") ? "page" : undefined}>Products</a>
+        <a href="/about" class="px-4 py-2.5 text-sm font-medium rounded-lg transition-all" class:list={[isActive("/about") ? "text-white bg-primary-800/50" : "text-primary-200 hover:text-white hover:bg-primary-800/50"]} aria-current={isActive("/about") ? "page" : undefined}>About</a>
+        <a href="/contact" class="px-4 py-2.5 text-sm font-medium rounded-lg transition-all" class:list={[isActive("/contact") ? "text-white bg-primary-800/50" : "text-primary-200 hover:text-white hover:bg-primary-800/50"]} aria-current={isActive("/contact") ? "page" : undefined}>Contact</a>
       </div>
       <div class="flex items-center gap-3">
         <a href="/client-login" class="hidden px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 rounded-lg md:inline-flex items-center gap-2 bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-400 hover:to-accent-500 hover:shadow-lg hover:shadow-accent-500/30 active:scale-95">
@@ -36,11 +41,11 @@
     </nav>
     <div id="mobile-menu" class="max-h-0 overflow-hidden opacity-0 transition-all duration-300 ease-in-out md:hidden border-t border-primary-800/50 bg-primary-950/95 backdrop-blur-md">
       <div class="px-4 py-3 space-y-1">
-        <a href="/" class="block px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50">Home</a>
-        <a href="/services" class="block px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50">Services</a>
-        <a href="/products" class="block px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50">Products</a>
-        <a href="/about" class="block px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50">About</a>
-        <a href="/contact" class="block px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50">Contact</a>
+        <a href="/" class="block px-4 py-2.5 text-sm font-medium rounded-lg" class:list={[isActive("/") ? "text-white bg-primary-800/50" : "text-primary-200 hover:text-white hover:bg-primary-800/50"]} aria-current={isActive("/") ? "page" : undefined}>Home</a>
+        <a href="/services" class="block px-4 py-2.5 text-sm font-medium rounded-lg" class:list={[isActive("/services") ? "text-white bg-primary-800/50" : "text-primary-200 hover:text-white hover:bg-primary-800/50"]} aria-current={isActive("/services") ? "page" : undefined}>Services</a>
+        <a href="/products" class="block px-4 py-2.5 text-sm font-medium rounded-lg" class:list={[isActive("/products") ? "text-white bg-primary-800/50" : "text-primary-200 hover:text-white hover:bg-primary-800/50"]} aria-current={isActive("/products") ? "page" : undefined}>Products</a>
+        <a href="/about" class="block px-4 py-2.5 text-sm font-medium rounded-lg" class:list={[isActive("/about") ? "text-white bg-primary-800/50" : "text-primary-200 hover:text-white hover:bg-primary-800/50"]} aria-current={isActive("/about") ? "page" : undefined}>About</a>
+        <a href="/contact" class="block px-4 py-2.5 text-sm font-medium rounded-lg" class:list={[isActive("/contact") ? "text-white bg-primary-800/50" : "text-primary-200 hover:text-white hover:bg-primary-800/50"]} aria-current={isActive("/contact") ? "page" : undefined}>Contact</a>
         <a href="/client-login" class="block px-4 py-2.5 mt-2 text-sm font-semibold text-center text-white rounded-lg bg-gradient-to-r from-accent-500 to-accent-600">Client Login</a>
       </div>
     </div>
