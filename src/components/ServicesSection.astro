@@ -8,8 +8,12 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
 <section class="py-24 bg-white" id="services">
   <div class="max-w-7xl mx-auto px-4">
     <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
-      <span class="section-badge mb-4">What We Do</span>
-      <h2 class="section-title">Comprehensive IT Services</h2>
+      <div class="flex items-center justify-center gap-3 mb-5">
+        <span class="h-px w-8 bg-gradient-to-r from-transparent to-primary-400"></span>
+        <span class="text-xs tracking-[0.15em] font-semibold text-primary-600 uppercase">What We Do</span>
+        <span class="h-px w-8 bg-gradient-to-r from-primary-400 to-transparent"></span>
+      </div>
+      <h2 class="section-title text-gradient">Comprehensive IT Services</h2>
       <p class="section-subtitle mx-auto">
         From concept to deployment, we provide end-to-end technology solutions tailored for Sri Lankan businesses.
       </p>
