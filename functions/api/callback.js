@@ -52,16 +52,17 @@ function htmlForSuccess(token) {
 <body>
 <script>
   (function() {
-    try {
-      if (window.opener) {
-        window.opener.postMessage('authorization:github:success:${message}', '*');
-        window.close();
-      } else {
-        document.body.textContent = 'Opener not found. Token: ${token}';
-      }
-    } catch(e) {
-      document.body.textContent = 'Error: ' + e.message;
+    if (!window.opener) {
+      document.body.textContent = 'Opener not found. Token: ${token}';
+      return;
     }
+    var receiveMessage = function(event) {
+      window.opener.postMessage('authorization:github:success:${message}', '*');
+      window.removeEventListener('message', receiveMessage, false);
+      window.close();
+    };
+    window.addEventListener('message', receiveMessage, false);
+    window.opener.postMessage('authorizing:github', '*');
   })();
 </script>
 </body>
