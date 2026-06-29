@@ -24,22 +24,65 @@
       </div>
       <div data-aos="fade-left" class="grid grid-cols-2 gap-4 max-sm:grid-cols-1">
         <div class="p-6 rounded-2xl glass card-hover">
-          <div class="text-3xl font-bold text-white font-display">9+</div>
+          <div class="text-3xl font-bold text-white font-display"><span class="stat-number" data-target="9" data-suffix="+">0</span></div>
           <div class="mt-1 text-sm text-primary-300">Years of Excellence</div>
         </div>
         <div class="p-6 rounded-2xl glass card-hover mt-8">
-          <div class="text-3xl font-bold text-white font-display">50+</div>
+          <div class="text-3xl font-bold text-white font-display"><span class="stat-number" data-target="50" data-suffix="+">0</span></div>
           <div class="mt-1 text-sm text-primary-300">Projects Completed</div>
         </div>
         <div class="p-6 rounded-2xl glass card-hover">
-          <div class="text-3xl font-bold text-white font-display">100%</div>
+          <div class="text-3xl font-bold text-white font-display"><span class="stat-number" data-target="100" data-suffix="%">0</span></div>
           <div class="mt-1 text-sm text-primary-300">Client Satisfaction</div>
         </div>
         <div class="p-6 rounded-2xl glass card-hover mt-8">
-          <div class="text-3xl font-bold text-white font-display">24/7</div>
+          <div class="text-3xl font-bold text-white font-display"><span class="stat-number" data-target="24/7">24/7</span></div>
           <div class="mt-1 text-sm text-primary-300">Support Available</div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const stats = document.querySelectorAll('.stat-number');
+
+  if (stats.length) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const raw = el.getAttribute('data-target');
+        const suffix = el.getAttribute('data-suffix') || '';
+        const target = parseFloat(raw);
+
+        if (isNaN(target)) {
+          observer.unobserve(el);
+          return;
+        }
+
+        const duration = 2000;
+        let startTime = null;
+
+        const step = (timestamp) => {
+          if (!startTime) startTime = timestamp;
+          const elapsed = (timestamp - startTime) / duration;
+          const progress = Math.min(elapsed, 1);
+          const eased = 1 - Math.pow(1 - progress, 5);
+          const current = Math.round(eased * target);
+          el.textContent = current + suffix;
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = target + suffix;
+          }
+        };
+
+        requestAnimationFrame(step);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.3 });
+
+    stats.forEach((el) => observer.observe(el));
+  }
+</script>
