@@ -34,19 +34,19 @@ const { heroTitle, heroSubtitle } = Astro.props;
           </a>
           <a href="/contact" class="btn-outline">Get a Quote</a>
         </div>
-        <div class="flex items-center gap-8 mt-12">
+        <div class="flex items-center gap-8 mt-12" id="stats">
           <div>
-            <div class="text-2xl font-bold text-white">9+</div>
+            <div class="text-2xl font-bold text-white"><span class="stat-counter" data-target="9" data-suffix="+">0+</span></div>
             <div class="text-sm text-primary-300">Years Experience</div>
           </div>
           <div class="w-px h-10 bg-primary-700"></div>
           <div>
-            <div class="text-2xl font-bold text-white">50+</div>
+            <div class="text-2xl font-bold text-white"><span class="stat-counter" data-target="50" data-suffix="+">0+</span></div>
             <div class="text-sm text-primary-300">Projects Delivered</div>
           </div>
           <div class="w-px h-10 bg-primary-700"></div>
           <div>
-            <div class="text-2xl font-bold text-white">100%</div>
+            <div class="text-2xl font-bold text-white"><span class="stat-counter" data-target="100" data-suffix="%">0%</span></div>
             <div class="text-sm text-primary-300">Client Satisfaction</div>
           </div>
         </div>
@@ -140,5 +140,50 @@ const { heroTitle, heroSubtitle } = Astro.props;
     } else {
       init();
     }
+  }
+</script>
+
+<script>
+  const statsEl = document.getElementById("stats");
+  if (statsEl) {
+    const counters = statsEl.querySelectorAll<HTMLElement>(".stat-counter");
+    let animated = false;
+
+    function easeOut(t: number): number {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function animateCounters() {
+      if (animated) return;
+      animated = true;
+      for (const el of counters) {
+        const target = parseInt(el.dataset.target || "0", 10);
+        const suffix = el.dataset.suffix || "";
+        const duration = Math.max(600, Math.min(1500, target * 20));
+        const start = performance.now();
+
+        function tick(now: number) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const current = Math.round(easeOut(progress) * target);
+          el.innerText = current + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+
+        requestAnimationFrame(tick);
+      }
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          animateCounters();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 },
+    );
+
+    observer.observe(statsEl);
   }
 </script>

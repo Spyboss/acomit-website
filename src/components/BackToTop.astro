@@ -1,0 +1,60 @@
+<button
+  id="back-to-top"
+  aria-label="Back to top"
+  title="Back to top"
+  class="fixed bottom-8 right-8 z-50 flex items-center justify-center w-11 h-11 rounded-full opacity-0 invisible transition-all duration-300 cursor-pointer"
+>
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+  </svg>
+</button>
+
+<style>
+  #back-to-top {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(216, 180, 254, 0.9);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.08);
+    transition: opacity 0.35s ease, visibility 0.35s ease, background 0.3s ease, border-color 0.3s ease;
+  }
+
+  #back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  #back-to-top:hover {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: rgba(168, 85, 247, 0.35);
+    color: #d8b4fe;
+  }
+
+  #back-to-top:focus-visible {
+    outline: 2px solid rgba(168, 85, 247, 0.6);
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  const btn = document.getElementById("back-to-top")!;
+  let shown = false;
+
+  function onScroll() {
+    const shouldShow = window.scrollY > 400;
+    if (shouldShow !== shown) {
+      shown = shouldShow;
+      btn.classList.toggle("show", shouldShow);
+    }
+  }
+
+  function scrollToTop(event: MouseEvent) {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  btn.addEventListener("click", scrollToTop);
+</script>

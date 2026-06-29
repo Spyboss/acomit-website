@@ -1,0 +1,44 @@
+<div id="cookie-consent" role="dialog" aria-label="Cookie consent" class="fixed bottom-0 left-0 right-0 z-50 translate-y-full opacity-0 transition-all duration-500">
+  <div class="mx-auto max-w-7xl px-4 pb-4">
+    <div class="flex flex-col items-start gap-4 rounded-2xl border border-white/10 bg-primary-950/85 px-6 py-5 backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-sm leading-relaxed text-primary-200 max-w-2xl">
+        This site uses cookies for analytics and performance. By continuing, you agree to our
+        <a href="/privacy" class="text-primary-300 underline decoration-primary-700 hover:text-white transition-colors">Privacy Policy</a>.
+      </p>
+      <div class="flex items-center gap-3 shrink-0">
+        <button id="cookie-decline" class="rounded-xl border border-white/10 px-5 py-2 text-sm font-medium text-primary-300 hover:bg-white/5 hover:text-white transition-all">Decline</button>
+        <button id="cookie-accept" class="rounded-xl bg-accent-500 px-5 py-2 text-sm font-medium text-white hover:bg-accent-400 transition-all">Accept</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #cookie-consent.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const KEY = "acomit-cookie-consent";
+
+  (function () {
+    if (localStorage.getItem(KEY) !== null) return;
+
+    const el = document.getElementById("cookie-consent")!;
+    const accept = document.getElementById("cookie-accept")!;
+    const decline = document.getElementById("cookie-decline")!;
+
+    el.classList.add("show");
+
+    function dismiss(choice: string) {
+      localStorage.setItem(KEY, choice);
+      el.classList.remove("show");
+      setTimeout(() => el.remove(), 500);
+    }
+
+    accept.addEventListener("click", () => dismiss("accepted"));
+    decline.addEventListener("click", () => dismiss("declined"));
+  })();
+</script>
