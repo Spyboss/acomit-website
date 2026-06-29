@@ -2,7 +2,7 @@
 title: "Credit Card Details Comparing System"
 tagline: "Help customers make informed financial decisions"
 description: "A comparison tool that lets users evaluate credit card features, interest rates, fees, and benefits side-by-side. Designed for financial institutions and comparison platforms."
-icon: "chart"
+icon: "credit-card"
 color: "purple"
 features:
   - "Side-by-side card comparison"

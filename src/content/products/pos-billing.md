@@ -2,7 +2,7 @@
 title: "Point of Sale Billing System"
 tagline: "Fast, reliable billing for retail & wholesale"
 description: "A powerful POS system designed for the Sri Lankan market. Process sales quickly, generate professional invoices, manage customers, and track payments — all from an intuitive interface."
-icon: "credit-card"
+icon: "chart"
 color: "green"
 features:
   - "Quick sale processing"
