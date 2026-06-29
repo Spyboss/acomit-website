@@ -34,7 +34,7 @@
         </button>
       </div>
     </nav>
-    <div id="mobile-menu" class="hidden border-t md:hidden border-primary-800/50 bg-primary-950/95 backdrop-blur-md">
+    <div id="mobile-menu" class="max-h-0 overflow-hidden opacity-0 transition-all duration-300 ease-in-out md:hidden border-t border-primary-800/50 bg-primary-950/95 backdrop-blur-md">
       <div class="px-4 py-3 space-y-1">
         <a href="/" class="block px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50">Home</a>
         <a href="/services" class="block px-4 py-2.5 text-sm font-medium text-primary-200 rounded-lg hover:text-white hover:bg-primary-800/50">Services</a>
@@ -54,7 +54,7 @@
   const closeIcon = document.getElementById("close-icon");
 
   btn?.addEventListener("click", () => {
-    menu?.classList.toggle("hidden");
+    menu?.classList.toggle("open");
     menuIcon?.classList.toggle("hidden");
     closeIcon?.classList.toggle("hidden");
   });
@@ -71,3 +71,10 @@
     lastScroll = current;
   });
 </script>
+
+<style>
+  #mobile-menu.open {
+    max-height: 24rem;
+    opacity: 1;
+  }
+</style>

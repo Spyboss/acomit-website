@@ -6,6 +6,7 @@ import HeroSection from "../components/HeroSection.astro";
 import ServicesSection from "../components/ServicesSection.astro";
 import ProductsSection from "../components/ProductsSection.astro";
 import AboutSection from "../components/AboutSection.astro";
+import ClientLogos from "../components/ClientLogos.astro";
 import ContactSection from "../components/ContactSection.astro";
 import { getEntry } from "astro:content";
 
@@ -22,6 +23,7 @@ const { hero_title, hero_subtitle } = home.data;
   <ServicesSection />
   <ProductsSection />
   <AboutSection />
+  <ClientLogos />
   <ContactSection />
 
   <Fragment slot="footer">

@@ -1,0 +1,42 @@
+---
+const clients = [
+  { src: "/assets/img/clients/chandana.jpeg", name: "Chandana" },
+  { src: "/assets/img/clients/dayan_tyres.png", name: "Dayan Tyres" },
+  { src: "/assets/img/clients/embilipitiya stores.jpeg", name: "Embilipitiya Stores" },
+  { src: "/assets/img/clients/images.jpeg", name: "Client" },
+  { src: "/assets/img/clients/pathirana_pharmacy.png", name: "Pathirana Pharmacy" },
+  { src: "/assets/img/clients/sarathchandra.png", name: "Sarathchandra" },
+];
+---
+
+<section class="py-16 bg-white overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4">
+    <p class="text-center text-sm font-medium text-gray-500 tracking-wider uppercase mb-10">
+      Trusted by Businesses Across Sri Lanka
+    </p>
+    <div class="relative">
+      <div class="flex gap-8 logo-track">
+        {[...clients, ...clients].map((c, i) => (
+          <div class="flex-shrink-0 w-28 h-28 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center p-4">
+            <img src={c.src} alt={c.name} class="w-full h-full object-contain" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .logo-track {
+    animation: scroll 30s linear infinite;
+  }
+
+  .logo-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>
