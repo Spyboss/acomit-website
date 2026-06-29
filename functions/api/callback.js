@@ -19,20 +19,26 @@ export async function onRequest(context) {
         client_id: env.GITHUB_CLIENT_ID,
         client_secret: env.GITHUB_CLIENT_SECRET,
         code,
+        redirect_uri: url.origin + "/api/callback",
       }),
     });
 
     const result = await res.json();
 
+    const headers = {
+      "content-type": "text/html",
+      "cross-origin-opener-policy": "unsafe-none",
+    };
+
     if (result.error) {
       return new Response(htmlForError(result), {
-        headers: { "content-type": "text/html" },
+        headers,
         status: 401,
       });
     }
 
     return new Response(htmlForSuccess(result.access_token), {
-      headers: { "content-type": "text/html" },
+      headers,
     });
   } catch (error) {
     return new Response(error.message, { status: 500 });
