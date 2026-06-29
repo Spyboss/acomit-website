@@ -29,7 +29,7 @@ export async function onRequest(context) {
 
     // Redirect to a static page that communicates with the opener
     // The token is passed in the hash fragment (never sent to server)
-    const redirectTo = `${origin}/admin/callback-success#token=${token}`;
+    const redirectTo = `${origin}/admin/callback-success#token=${encodeURIComponent(token)}`;
     return Response.redirect(redirectTo, 302);
   } catch (error) {
     return new Response(error.message, { status: 500 });
