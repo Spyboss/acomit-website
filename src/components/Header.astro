@@ -19,7 +19,7 @@ const isActive = (href: string) => pathname === href || pathname === href + "/";
     </div>
     <nav class="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto">
       <a href="/" class="flex items-center">
-        <img src="/assets/img/logo-1.png" alt="Acom IT" class="h-10" />
+        <img src="/assets/img/logo-1.png" alt="Acom IT" width="145" height="54" class="h-10" />
       </a>
       <div class="hidden md:flex items-center gap-1">
         <a href="/" class="px-4 py-2.5 text-sm font-medium rounded-lg transition-all" class:list={[isActive("/") ? "text-white bg-primary-800/50" : "text-primary-200 hover:text-white hover:bg-primary-800/50"]} aria-current={isActive("/") ? "page" : undefined}>Home</a>

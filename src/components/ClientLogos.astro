@@ -27,10 +27,13 @@ const clients = [
         {[...clients, ...clients, ...clients].map((c, i) => (
           <div
             class="flex-shrink-0 w-[136px] h-[136px] rounded-2xl bg-white/70 backdrop-blur-sm border border-primary-100/60 flex items-center justify-center p-5 card-hover transition-all duration-300"
+            aria-hidden={i >= clients.length ? "true" : undefined}
+            tabindex={i >= clients.length ? "-1" : undefined}
           >
             <img
               src={c.src}
               alt={`${c.name} — Acom IT Client`}
+              width="136" height="136"
               class="w-full h-full object-contain"
               loading="lazy"
             />
