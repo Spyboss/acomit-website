@@ -181,11 +181,23 @@
   .btn-accent:active {
     transform: scale(0.95);
   }
+  .section-badge {
+    display: inline-block;
+    padding: 0.375rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    color: white;
+    background: linear-gradient(to right, var(--color-primary-500), var(--color-accent-500));
+  }
   .section-title {
     font-family: var(--font-family-display);
     font-size: 1.875rem;
     font-weight: 700;
-    color: var(--color-gray-900);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, var(--color-primary-400), var(--color-accent-400));
   }
   @media (width >= 768px) {
     .section-title {
@@ -195,7 +207,7 @@
   .section-subtitle {
     margin-top: 1rem;
     font-size: 1.125rem;
-    color: var(--color-gray-600);
+    color: var(--color-gray-500);
     max-width: 36rem;
   }
 }
